@@ -18,6 +18,6 @@ public class SizeSetting extends WorldSetting {
                         b("size.immense","50000"),
                         b("size.gigantic","100000"),
                         b("size.oversized","1000000")),
-                "Size", "settings.size.desc", Material.GRASS_BLOCK, true);
+                "Size", "settings.size.desc", Material.GRASS, true);
     }
 }

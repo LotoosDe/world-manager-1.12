@@ -1,7 +1,6 @@
 package de.hyper.worlds.domain.using.apis;
 
-import com.sk89q.worldedit.bukkit.BukkitAdapter;
-import com.sk89q.worldedit.extension.platform.Actor;
+import com.boydti.fawe.object.FawePlayer;
 import de.hyper.worlds.domain.WorldManagement;
 import org.bukkit.entity.Player;
 
@@ -24,11 +23,11 @@ public class FaweAPI {
 
     public void setWEA(Player player, boolean allowed) {
         if (existsFAWE) {
-            getFaweActor(player).setPermission("fawe.bypass", allowed);
+            getFaweActor(player).toggle("fawe.bypass");
         }
     }
 
-    public Actor getFaweActor(Player player) {
-        return BukkitAdapter.adapt(player);
+    public FawePlayer getFaweActor(Player player) {
+        return FawePlayer.wrap(player);
     }
 }

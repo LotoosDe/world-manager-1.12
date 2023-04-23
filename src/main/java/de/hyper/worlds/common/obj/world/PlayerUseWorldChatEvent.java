@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-import org.jetbrains.annotations.NotNull;
 
 @RequiredArgsConstructor
 @Getter
@@ -47,7 +46,6 @@ public class PlayerUseWorldChatEvent extends Event implements Cancellable {
         return null;
     }
 
-    @NotNull
     @Override
     public HandlerList getHandlers() {
         return getHandlerList();

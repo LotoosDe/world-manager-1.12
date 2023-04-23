@@ -12,6 +12,6 @@ public class LeafDecaySetting extends WorldSetting {
                 new SettingState(
                         b("leafdecay.off","false"),
                         b("leafdecay.on","true")),
-                "Leaf-Decay", "settings.leafdecay.desc", Material.OAK_LEAVES, false);
+                "Leaf-Decay", "settings.leafdecay.desc", Material.LEAVES, false);
     }
 }

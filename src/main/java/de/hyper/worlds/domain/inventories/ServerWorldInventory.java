@@ -101,7 +101,7 @@ public class ServerWorldInventory extends Inventory {
                         .setLore(
                                 lang.getText("inventory.world.users.desc.1"))
                         .getItem());
-        if (WorldManagement.get().getCoreProtectAPI().isExistsCO()) {
+        /*if (WorldManagement.get().getCoreProtectAPI().isExistsCO()) {
             registerButton(5, 4, new OpenInventoryButton(new HistoryInventory(serverWorld), player),
                     new ItemBuilder(HDBSkulls.CLOCK)
                             .setDisplayName(
@@ -109,7 +109,7 @@ public class ServerWorldInventory extends Inventory {
                             .setLore(
                                     lang.getText("inventory.world.history.desc.1"))
                             .getItem());
-        }
+        }*/
         return this;
     }
 

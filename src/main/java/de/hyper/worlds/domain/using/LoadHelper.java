@@ -51,7 +51,6 @@ public class LoadHelper {
         list.add(new EntityBlockFormSetting());
         list.add(new BlockFromToSetting());
         list.add(new BlockGrowSetting());
-        list.add(new BlockFertilizeSetting());
         list.add(new BlockBurnSetting());
         list.add(new GameModeSetting());
         list.add(new BlockFadeSetting());
@@ -129,12 +128,11 @@ public class LoadHelper {
     }
 
     public WorldRole getDefaultRole() {
-        return new WorldRole(createSaveUUID(), "Visitor", toList(new ArrayList<RoleAdmission>(),
+        return new WorldRole(createSaveUUID(), "Visitor", toList(new ArrayList<>(),
                 admission("Enter World", "enter", true),
                 admission("Use WorldEdit", "worldedit", false),
                 admission("Place Blocks", "blocks.place", false),
                 admission("Break Blocks", "blocks.break", false),
-                admission("Harvest Blocks", "blocks.harvest", false),
                 admission("Fish", "fish", false),
                 admission("Drop Items", "item.drop", true),
                 admission("PickUp Items", "item.pickup", true),
@@ -182,7 +180,6 @@ public class LoadHelper {
                 admission("Use WorldEdit", "worldedit", false),
                 admission("Place Blocks", "blocks.place", true),
                 admission("Break Blocks", "blocks.break", true),
-                admission("Harvest Blocks", "blocks.harvest", false),
                 admission("Fish", "fish", false),
                 admission("Drop Items", "item.drop", true),
                 admission("PickUp Items", "item.pickup", true),
@@ -221,7 +218,6 @@ public class LoadHelper {
                 admission("Use WorldEdit", "worldedit", true),
                 admission("Place Blocks", "blocks.place", true),
                 admission("Break Blocks", "blocks.break", true),
-                admission("Harvest Blocks", "blocks.harvest", true),
                 admission("Fish", "fish", true),
                 admission("Drop Items", "item.drop", true),
                 admission("PickUp Items", "item.pickup", true),

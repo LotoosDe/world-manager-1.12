@@ -6,22 +6,22 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class GlassPane {
 	
-	public static final ItemStack C0 = get(Material.WHITE_STAINED_GLASS_PANE),
-			C1 = get(Material.ORANGE_STAINED_GLASS_PANE),
-			C2 = get(Material.MAGENTA_STAINED_GLASS_PANE),
-			C3 = get(Material.LIGHT_BLUE_STAINED_GLASS_PANE),
-			C4 = get(Material.YELLOW_STAINED_GLASS_PANE),
-			C5 = get(Material.LIME_STAINED_GLASS_PANE),
-			C6 = get(Material.PINK_STAINED_GLASS_PANE),
-			C7 = get(Material.GRAY_STAINED_GLASS_PANE),
-			C8 = get(Material.LIGHT_GRAY_STAINED_GLASS_PANE),
-			C9 = get(Material.CYAN_STAINED_GLASS_PANE),
-			C10 = get(Material.PURPLE_STAINED_GLASS_PANE),
-			C11 = get(Material.BLUE_STAINED_GLASS_PANE),
-			C12 = get(Material.BROWN_STAINED_GLASS_PANE),
-			C13 = get(Material.GREEN_STAINED_GLASS_PANE),
-			C14 = get(Material.RED_STAINED_GLASS_PANE),
-			C15 = get(Material.BLACK_STAINED_GLASS_PANE);
+	public static final ItemStack C0 = get(Material.STAINED_GLASS_PANE, 0),
+			C1 = get(Material.STAINED_GLASS_PANE, 1),
+			C2 = get(Material.STAINED_GLASS_PANE, 2),
+			C3 = get(Material.STAINED_GLASS_PANE, 3),
+			C4 = get(Material.STAINED_GLASS_PANE, 4),
+			C5 = get(Material.STAINED_GLASS_PANE, 5),
+			C6 = get(Material.STAINED_GLASS_PANE, 6),
+			C7 = get(Material.STAINED_GLASS_PANE, 7),
+			C8 = get(Material.STAINED_GLASS_PANE, 8),
+			C9 = get(Material.STAINED_GLASS_PANE, 9),
+			C10 = get(Material.STAINED_GLASS_PANE, 10),
+			C11 = get(Material.STAINED_GLASS_PANE, 11),
+			C12 = get(Material.STAINED_GLASS_PANE, 12),
+			C13 = get(Material.STAINED_GLASS_PANE, 13),
+			C14 = get(Material.STAINED_GLASS_PANE, 14),
+			C15 = get(Material.STAINED_GLASS_PANE, 15);
 	public static final ItemStack WHITE = C0,
 			ORANGE = C1,
 			MAGENTA = C2,
@@ -39,8 +39,8 @@ public class GlassPane {
 			RED = C14,
 			BLACK = C15;
 
-	private static final ItemStack get(Material mat) {
-		ItemStack is = new ItemStack(mat, 1);
+	private static final ItemStack get(Material mat, int subID) {
+		ItemStack is = new ItemStack(mat, 1, (byte) subID);
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName("§a");
 		is.setItemMeta(im);

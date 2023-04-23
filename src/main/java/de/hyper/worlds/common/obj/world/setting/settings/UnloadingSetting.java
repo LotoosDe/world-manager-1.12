@@ -12,6 +12,6 @@ public class UnloadingSetting extends WorldSetting {
                 new SettingState(
                         b("unloading.on","true"),
                         b("unloading.off","false")),
-                "Unloading", "settings.unloading.desc", Material.CHEST_MINECART, true);
+                "Unloading", "settings.unloading.desc", Material.STORAGE_MINECART, true);
     }
 }

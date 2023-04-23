@@ -59,7 +59,7 @@ public class InventoryManager implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        org.bukkit.inventory.@Nullable Inventory bukkitInventory = event.getClickedInventory();
+        org.bukkit.inventory.Inventory bukkitInventory = event.getClickedInventory();
         InventoryView inventoryView = event.getView();
         if (bukkitInventory != null && inventoryView != null) {
             if (inventoryView.getTitle() != null && inventoryView.getTitle().startsWith(inventoryIdentifier)) {
@@ -74,7 +74,7 @@ public class InventoryManager implements Listener {
 
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
-        org.bukkit.inventory.@Nullable Inventory bukkitInventory = event.getInventory();
+        org.bukkit.inventory.Inventory bukkitInventory = event.getInventory();
         InventoryView inventoryView = event.getView();
         if (bukkitInventory != null && inventoryView != null) {
             if (inventoryView.getTitle() != null && inventoryView.getTitle().startsWith(inventoryIdentifier)) {

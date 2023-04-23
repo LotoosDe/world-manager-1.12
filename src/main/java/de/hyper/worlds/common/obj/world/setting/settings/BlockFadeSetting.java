@@ -12,6 +12,6 @@ public class BlockFadeSetting extends WorldSetting {
                 new SettingState(
                         b("blockfade.off", "false"),
                         b("blockfade.on", "true")),
-                "Block-Fade", "settings.blockfade.desc", Material.BUBBLE_CORAL, false);
+                "Block-Fade", "settings.blockfade.desc", Material.SNOW_BLOCK, false);
     }
 }

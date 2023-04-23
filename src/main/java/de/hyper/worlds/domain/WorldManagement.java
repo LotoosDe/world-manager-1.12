@@ -10,7 +10,6 @@ import de.hyper.worlds.domain.events.JoinEvents;
 import de.hyper.worlds.domain.events.RoleEvents;
 import de.hyper.worlds.domain.events.SettingEvents;
 import de.hyper.worlds.domain.using.*;
-import de.hyper.worlds.domain.using.apis.CoreProtectAPI;
 import de.hyper.worlds.domain.using.apis.FaweAPI;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -34,7 +33,6 @@ public class WorldManagement extends JavaPlugin {
     private InventoryManager inventoryManager;
     private DependencyManager dependencyManager;
     private FaweAPI fawe;
-    private CoreProtectAPI coreProtectAPI;
 
     @Override
     public void onLoad() {
@@ -50,11 +48,8 @@ public class WorldManagement extends JavaPlugin {
         this.loadHelper = new LoadHelper();
         this.language = new Language(configuration.getData("language").asString());
         this.inventoryManager = new InventoryManager(this, "WIS");
-        this.dependencyManager = new DependencyManager(
-                new Dependency("com.fastasyncworldedit.bukkit.FaweBukkit"),
-                new Dependency("net.coreprotect.CoreProtect"));
+        this.dependencyManager = new DependencyManager(new Dependency("com.fastasyncworldedit.bukkit.FaweBukkit"));
         this.fawe = new FaweAPI();
-        this.coreProtectAPI = new CoreProtectAPI();
         this.getCommand("world").setExecutor(new WorldCommand());
         pluginManager.registerEvents(new RoleEvents(), this);
         pluginManager.registerEvents(new JoinEvents(), this);

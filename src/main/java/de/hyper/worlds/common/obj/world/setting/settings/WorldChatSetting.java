@@ -12,6 +12,6 @@ public class WorldChatSetting extends WorldSetting {
                 new SettingState(
                         b("worldchat.off", "false"),
                         b("worldchat.on", "true")),
-                "World-Chat", "settings.worldchat.desc", Material.FILLED_MAP, false);
+                "World-Chat", "settings.worldchat.desc", Material.MAP, false);
     }
 }

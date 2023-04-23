@@ -12,6 +12,6 @@ public class MobSpawnSetting extends WorldSetting {
                 new SettingState(
                         b("mobspawn.off","false"),
                         b("mobspawn.on","true")),
-                "Mob-Spawn", "settings.mobspawn.desc", Material.CREEPER_SPAWN_EGG, false);
+                "Mob-Spawn", "settings.mobspawn.desc", Material.MOB_SPAWNER, false);
     }
 }

@@ -17,6 +17,6 @@ public class RandomTickSpeedSetting extends WorldSetting {
                         b("randomtickspeed.ultra","7"),
                         b("randomtickspeed.highspeed","10"),
                         b("randomtickspeed.overkill","25")),
-                "Random-Tick-Speed", "settings.randomtickspeed.desc", Material.WHEAT_SEEDS, true);
+                "Random-Tick-Speed", "settings.randomtickspeed.desc", Material.SEEDS, true);
     }
 }

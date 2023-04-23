@@ -30,16 +30,6 @@ public class RoleEvents implements Listener {
     }
 
     @EventHandler
-    public void onPlayerHarvestBlock(PlayerHarvestBlockEvent event) {
-        ServerWorld serverWorld = cache.getServerWorld(event.getPlayer().getWorld().getName());
-        if (serverWorld != null) {
-            if (!serverWorld.isAllowed(event.getPlayer(), "blocks.harvest")) {
-                event.setCancelled(true);
-            }
-        }
-    }
-
-    @EventHandler
     public void onPlayerInteractAtEntity(PlayerInteractAtEntityEvent event) {
         ServerWorld serverWorld = cache.getServerWorld(event.getPlayer().getWorld().getName());
         if (serverWorld != null) {

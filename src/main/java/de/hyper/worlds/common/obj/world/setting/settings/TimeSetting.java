@@ -15,6 +15,6 @@ public class TimeSetting extends WorldSetting {
                         b("time.night","13000"),
                         b("time.midnight","15000"),
                         b("time.running","-1")),
-                "Time", "settings.time.desc", Material.CLOCK, false);
+                "Time", "settings.time.desc", Material.WATCH, false);
     }
 }

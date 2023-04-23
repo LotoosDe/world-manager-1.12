@@ -12,6 +12,6 @@ public class BlockPhysicsSetting extends WorldSetting {
                 new SettingState(
                         b("blockphysics.off","false"),
                         b("blockphysics.on","true")),
-                "Block-Physics", "settings.blockphysics.desc", Material.GLOW_INK_SAC, false);
+                "Block-Physics", "settings.blockphysics.desc", Material.INK_SACK, false);
     }
 }

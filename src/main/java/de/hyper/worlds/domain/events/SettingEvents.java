@@ -13,7 +13,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Animals;
-import org.bukkit.entity.Mob;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -69,18 +69,6 @@ public class SettingEvents implements Listener {
         ServerWorld serverWorld = WorldManagement.get().getCache().getServerWorld(world.getName());
         if (serverWorld != null) {
             WorldSetting setting = serverWorld.getWorldSetting(SettingType.BLOCK_BURN);
-            StatePart part = setting.getState().getActive();
-            boolean value = Converter.getBoolean(part.getValue());
-            event.setCancelled(!value);
-        }
-    }
-
-    @EventHandler
-    public void onBlockFertilize(BlockFertilizeEvent event) {
-        World world = event.getBlock().getWorld();
-        ServerWorld serverWorld = WorldManagement.get().getCache().getServerWorld(world.getName());
-        if (serverWorld != null) {
-            WorldSetting setting = serverWorld.getWorldSetting(SettingType.BLOCK_FERTILIZE);
             StatePart part = setting.getState().getActive();
             boolean value = Converter.getBoolean(part.getValue());
             event.setCancelled(!value);
@@ -149,7 +137,7 @@ public class SettingEvents implements Listener {
 
     @EventHandler
     public void onSpawnerSpawn(SpawnerSpawnEvent event) {
-        if (event.getEntity() instanceof Animals || event.getEntity() instanceof Mob) {
+        if (event.getEntity() instanceof Animals || event.getEntity() instanceof Monster) {
             World world = event.getEntity().getWorld();
             ServerWorld serverWorld = WorldManagement.get().getCache().getServerWorld(world.getName());
             if (serverWorld != null) {
@@ -163,25 +151,11 @@ public class SettingEvents implements Listener {
 
     @EventHandler
     public void onCreateSpawn(CreatureSpawnEvent event) {
-        if (event.getEntity() instanceof Animals || event.getEntity() instanceof Mob) {
+        if (event.getEntity() instanceof Animals || event.getEntity() instanceof Monster) {
             World world = event.getEntity().getWorld();
             ServerWorld serverWorld = WorldManagement.get().getCache().getServerWorld(world.getName());
             if (serverWorld != null) {
                 WorldSetting setting = serverWorld.getWorldSetting(SettingType.MOB_SPAWNING);
-                StatePart part = setting.getState().getActive();
-                boolean value = Converter.getBoolean(part.getValue());
-                event.setCancelled(!value);
-            }
-        }
-    }
-
-    @EventHandler
-    public void onEntityDropItem(EntityDropItemEvent event) {
-        if (event.getEntity() instanceof Animals || event.getEntity() instanceof Mob) {
-            World world = event.getEntity().getWorld();
-            ServerWorld serverWorld = WorldManagement.get().getCache().getServerWorld(world.getName());
-            if (serverWorld != null) {
-                WorldSetting setting = serverWorld.getWorldSetting(SettingType.MOB_DROPS);
                 StatePart part = setting.getState().getActive();
                 boolean value = Converter.getBoolean(part.getValue());
                 event.setCancelled(!value);
@@ -198,24 +172,15 @@ public class SettingEvents implements Listener {
             StatePart part = setting.getState().getActive();
             boolean value = Converter.getBoolean(part.getValue());
             event.setCancelled(!value);
-            event.getEntity().setFoodLevel(20);
+            if (event.getEntity() instanceof Player) {
+                Player player = (Player) event.getEntity();
+                player.setFoodLevel(20);
+            }
         }
     }
 
     @EventHandler
-    public void onEntityPotionEffect(EntityPotionEffectEvent event) {
-        World world = event.getEntity().getWorld();
-        ServerWorld serverWorld = WorldManagement.get().getCache().getServerWorld(world.getName());
-        if (serverWorld != null) {
-            WorldSetting setting = serverWorld.getWorldSetting(SettingType.POTION);
-            StatePart part = setting.getState().getActive();
-            boolean value = Converter.getBoolean(part.getValue());
-            event.setCancelled(!value);
-        }
-    }
-
-    @EventHandler
-    public void onPotionSplash(PotionSplashEvent event) {
+    public void onEntityPotionEffect(PotionSplashEvent event) {
         World world = event.getEntity().getWorld();
         ServerWorld serverWorld = WorldManagement.get().getCache().getServerWorld(world.getName());
         if (serverWorld != null) {
@@ -293,21 +258,22 @@ public class SettingEvents implements Listener {
         StatePart part = setting.getState().getActive();
         String value = part.getValue();
         if (settingType == SettingType.TIME) {
-            GameRule gameRule = GameRule.DO_DAYLIGHT_CYCLE;
             if (value.equals("-1")) {
-                world.setGameRule(gameRule, true);
+                world.setGameRuleValue("duDayligtCycle", "true");
             } else {
-                world.setGameRule(gameRule, false);
+                world.setGameRuleValue("duDayligtCycle", "false");
                 world.setTime(Converter.getPositiveLong(value));
             }
         }
+        if (settingType == SettingType.MOB_DROPS) {
+            world.setGameRuleValue("doEntityDrops", "false");
+        }
         if (settingType == SettingType.WEATHER) {
-            GameRule gameRule = GameRule.DO_WEATHER_CYCLE;
             if (value.equals("running")) {
-                world.setGameRule(gameRule, true);
+                world.setGameRuleValue("doWeatherCycle", "true");
                 return;
             }
-            world.setGameRule(gameRule, false);
+            world.setGameRuleValue("doWeatherCycle", "false");
             if (value.equals("sun")) {
                 world.setStorm(false);
                 world.setThundering(false);
@@ -320,8 +286,7 @@ public class SettingEvents implements Listener {
             }
         }
         if (settingType == SettingType.RANDOMTICKSPEED) {
-            GameRule gameRule = GameRule.RANDOM_TICK_SPEED;
-            world.setGameRule(gameRule, Converter.getInteger(value));
+            world.setGameRuleValue("randomTickSpeed", "" + Converter.getInteger(value));
         }
         if (settingType == SettingType.SIZE) {
             WorldBorder border = world.getWorldBorder();
@@ -372,10 +337,10 @@ public class SettingEvents implements Listener {
 
     @EventHandler
     public void onBlockPhysics(BlockPhysicsEvent event) {
-        World world = event.getSourceBlock().getWorld();
+        World world = event.getBlock().getWorld();
         ServerWorld serverWorld = WorldManagement.get().getCache().getServerWorld(world.getName());
         if (serverWorld != null) {
-            Block block = event.getSourceBlock();
+            Block block = event.getBlock();
             boolean powerable = isPowerable(block);
             SettingType settingType = powerable ? SettingType.REDSTONE : SettingType.BLOCK_PHYSICS;
             WorldSetting setting = serverWorld.getWorldSetting(settingType);
@@ -386,32 +351,21 @@ public class SettingEvents implements Listener {
     }
 
     public boolean isPowerable(Block block) {
-        List<Material> materialList = List.of(Material.REDSTONE, Material.PISTON, Material.STICKY_PISTON,
-                Material.OAK_BUTTON, Material.BIRCH_BUTTON, Material.ACACIA_BUTTON,
-                Material.CRIMSON_BUTTON, Material.OAK_BUTTON, Material.DARK_OAK_BUTTON,
-                Material.JUNGLE_BUTTON, Material.POLISHED_BLACKSTONE_BUTTON, Material.SPRUCE_BUTTON,
-                Material.STONE_BUTTON, Material.WARPED_BUTTON, Material.POWERED_RAIL,
-                Material.COMMAND_BLOCK, Material.CHAIN_COMMAND_BLOCK, Material.REPEATING_COMMAND_BLOCK,
-                Material.REPEATER, Material.COMPARATOR, Material.REDSTONE_TORCH,
-                Material.REDSTONE_LAMP, Material.REDSTONE_WIRE, Material.REDSTONE_WALL_TORCH,
-                Material.OBSERVER, Material.HOPPER, Material.DISPENSER,
-                Material.DROPPER, Material.LECTERN, Material.TARGET,
-                Material.LEVER, Material.LIGHTNING_ROD, Material.DAYLIGHT_DETECTOR,
-                Material.TRIPWIRE, Material.TRIPWIRE_HOOK, Material.TRAPPED_CHEST,
-                Material.TNT, Material.NOTE_BLOCK, Material.ACACIA_PRESSURE_PLATE,
-                Material.BIRCH_PRESSURE_PLATE, Material.CRIMSON_PRESSURE_PLATE, Material.DARK_OAK_PRESSURE_PLATE,
-                Material.HEAVY_WEIGHTED_PRESSURE_PLATE, Material.JUNGLE_PRESSURE_PLATE, Material.LIGHT_WEIGHTED_PRESSURE_PLATE,
-                Material.OAK_PRESSURE_PLATE, Material.POLISHED_BLACKSTONE_PRESSURE_PLATE, Material.SPRUCE_PRESSURE_PLATE,
-                Material.STONE_PRESSURE_PLATE, Material.WARPED_PRESSURE_PLATE, Material.ACACIA_DOOR,
-                Material.ACACIA_TRAPDOOR, Material.BIRCH_DOOR, Material.BIRCH_TRAPDOOR,
-                Material.CRIMSON_DOOR, Material.CRIMSON_TRAPDOOR, Material.DARK_OAK_DOOR,
-                Material.DARK_OAK_TRAPDOOR, Material.IRON_DOOR, Material.IRON_TRAPDOOR,
-                Material.JUNGLE_DOOR, Material.JUNGLE_TRAPDOOR, Material.OAK_DOOR,
-                Material.OAK_TRAPDOOR, Material.SPRUCE_DOOR, Material.SPRUCE_TRAPDOOR,
-                Material.WARPED_DOOR, Material.WARPED_TRAPDOOR, Material.ACACIA_FENCE_GATE,
-                Material.BIRCH_FENCE_GATE, Material.CRIMSON_FENCE_GATE, Material.DARK_OAK_FENCE_GATE,
-                Material.JUNGLE_FENCE_GATE, Material.OAK_FENCE_GATE, Material.SPRUCE_FENCE_GATE,
-                Material.WARPED_FENCE_GATE, Material.REDSTONE_BLOCK);
+        List<Material> materialList = List.of(Material.REDSTONE, Material.PISTON_BASE, Material.PISTON_STICKY_BASE,
+                Material.WOOD_BUTTON, Material.STONE_BUTTON, Material.POWERED_RAIL,
+                Material.COMMAND, Material.COMMAND_CHAIN, Material.COMMAND_MINECART,
+                Material.COMMAND_REPEATING, Material.DIODE, Material.REDSTONE_COMPARATOR,
+                Material.REDSTONE_TORCH_ON, Material.REDSTONE_TORCH_ON, Material.REDSTONE_WIRE,
+                Material.REDSTONE_LAMP_ON, Material.REDSTONE_LAMP_OFF, Material.OBSERVER,
+                Material.HOPPER, Material.DISPENSER, Material.DROPPER,
+                Material.LEVER, Material.DAYLIGHT_DETECTOR, Material.TRIPWIRE,
+                Material.TRIPWIRE_HOOK, Material.TRAPPED_CHEST, Material.TNT,
+                Material.NOTE_BLOCK, Material.WOOD_PLATE, Material.STONE_PLATE,
+                Material.ACACIA_DOOR, Material.BIRCH_DOOR, Material.DARK_OAK_DOOR,
+                Material.IRON_DOOR, Material.IRON_TRAPDOOR, Material.JUNGLE_DOOR,
+                Material.SPRUCE_DOOR, Material.ACACIA_FENCE_GATE, Material.BIRCH_FENCE_GATE,
+                Material.DARK_OAK_FENCE_GATE, Material.JUNGLE_FENCE_GATE, Material.SPRUCE_FENCE_GATE,
+                Material.REDSTONE_BLOCK);
         return materialList.contains(block.getType());
     }
 

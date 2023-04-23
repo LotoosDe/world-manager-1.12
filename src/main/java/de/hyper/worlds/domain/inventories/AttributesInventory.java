@@ -89,7 +89,7 @@ public class AttributesInventory extends Inventory {
                     fillInventory();
                 }
             }
-        }, new ItemBuilder(Material.REDSTONE_TORCH)
+        }, new ItemBuilder(Material.REDSTONE_TORCH_ON)
                 .setDisplayName(
                         lang.getText("inventory.attributes.ignoration.name"))
                 .setLore(

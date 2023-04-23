@@ -41,7 +41,7 @@ public class MainInventory extends Inventory {
         }
         registerButton(3, 6,
                 new OpenInventoryButton(new FilterInventory(), player),
-                new ItemBuilder(Material.SPYGLASS)
+                new ItemBuilder(Material.FISHING_ROD)
                         .setDisplayName(
                                 lang.getText("inventory.main.filter.name"))
                         .setLore(
