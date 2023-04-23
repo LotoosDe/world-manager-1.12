@@ -3,16 +3,15 @@ package de.hyper.worlds.common.obj.world.generators;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
 public class FlatChunkGenerator extends ChunkGenerator {
 
-    @NotNull
+
     @Override
-    public ChunkData generateChunkData(@NotNull World world, @NotNull Random random, int x, int z,
-                                       @NotNull ChunkGenerator.BiomeGrid biome) {
+    public ChunkData generateChunkData( World world,  Random random, int x, int z,
+                                        ChunkGenerator.BiomeGrid biome) {
         ChunkData chunk = createChunkData(world);
         for (int X = 0; X < 16; X++) {
             for (int Z = 0; Z < 16; Z++) {
@@ -30,12 +29,10 @@ public class FlatChunkGenerator extends ChunkGenerator {
             mat = Material.BEDROCK;
         } else if (y == 1) {
             mat = Material.STONE;
-        } else if (y == 2) {
-            mat = Material.COARSE_DIRT;
-        } else if (y == 3) {
+        } else if (y == 2 || y == 3) {
             mat = Material.DIRT;
         } else if (y == 4) {
-            mat = Material.GRASS_BLOCK;
+            mat = Material.GRASS;
         }
         return mat;
     }

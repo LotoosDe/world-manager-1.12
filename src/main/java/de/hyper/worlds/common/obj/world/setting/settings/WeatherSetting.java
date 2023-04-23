@@ -14,6 +14,6 @@ public class WeatherSetting extends WorldSetting {
                         b("weather.rain","rain"),
                         b("weather.storm","storm"),
                         b("weather.running","running")),
-                "Weather", "settings.weather.desc", Material.SNOWBALL, false);
+                "Weather", "settings.weather.desc", Material.SNOW_BALL, false);
     }
 }
