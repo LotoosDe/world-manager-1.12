@@ -341,8 +341,8 @@ public class SettingEvents implements Listener {
         ServerWorld serverWorld = WorldManagement.get().getCache().getServerWorld(world.getName());
         if (serverWorld != null) {
             Block block = event.getBlock();
-            boolean powerable = isPowerable(block);
-            SettingType settingType = powerable ? SettingType.REDSTONE : SettingType.BLOCK_PHYSICS;
+            //boolean powerable = isPowerable(block);
+            SettingType settingType = SettingType.BLOCK_PHYSICS;
             WorldSetting setting = serverWorld.getWorldSetting(settingType);
             StatePart part = setting.getState().getActive();
             boolean value = Converter.getBoolean(part.getValue());

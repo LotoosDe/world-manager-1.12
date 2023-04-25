@@ -25,13 +25,13 @@ public class OceanChunkGenerator extends ChunkGenerator {
 
     public Material getMaterialY(int y) {
         Material mat = Material.WATER;
-        if (y == -64) {
+        if (y == 0) {
             mat = Material.BEDROCK;
-        } else if (y == -63) {
+        } else if (y == 1) {
             mat = Material.STONE;
-        } else if (y == -62 || y== -61) {
+        } else if (y == 2 || y== 3) {
             mat = Material.GRAVEL;
-        } else if (y > -61 && y < 1) {
+        } else if (y > 3 && y < 17) {
             mat = Material.WATER;
         }
         return mat;
