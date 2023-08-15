@@ -301,7 +301,7 @@ public class Language {
         registerText("settings.blockburn.desc", "§7§oStelle ein ob Blöcke verbrennen können.", "§7§oSet if blocks can burn down.");
         registerText("settings.blockburn.on", "§a§lAktiv", "§a§lActive");
         registerText("settings.blockburn.off", "§c§lInaktiv", "§c§lInactive");
-        registerText("settings.gamemode.desc", "§7§oStelle ein ob Blöcke verbrennen können.", "§7§oSet if blocks can burn down.");
+        registerText("settings.gamemode.desc", "§7§oStelle den Spielmodus der Welt ein.", "§7§oSet the gamemode of the world.");
         registerText("settings.gamemode.keep", "§a§lBehalten", "§a§lKeep");
         registerText("settings.gamemode.survival", "§6§lÜberleben", "§6§lSurvival");
         registerText("settings.gamemode.creative", "§e§lCreative", "§e§lCreative");

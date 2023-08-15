@@ -22,8 +22,21 @@ public class FaweAPI {
     }
 
     public void setWEA(Player player, boolean allowed) {
-        if (existsFAWE) {
-            getFaweActor(player).toggle("fawe.bypass");
+        System.out.println("setWEA for " + player.getName() + " to " + allowed);
+        try {
+            System.out.println(player.getName() + ": fawe exists");
+            if (!hasWEA.contains(player) && allowed) {
+                System.out.println(player.getName() + ": hat noch kein wea & soll haben");
+                System.out.println(player.getName() + ": toggle: " + getFaweActor(player).toggle("fawe.bypass"));
+                System.out.println(player.getName() + ": add: " + hasWEA.add(player));
+            } else if (hasWEA.contains(player) && !allowed) {
+                getFaweActor(player).toggle("fawe.bypass");
+                hasWEA.remove(player);
+                System.out.println(player.getName() + ": wea wurde entfernt");
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

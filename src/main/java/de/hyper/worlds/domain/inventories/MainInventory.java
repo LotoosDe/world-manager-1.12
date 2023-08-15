@@ -23,7 +23,7 @@ public class MainInventory extends Inventory {
     public Inventory fillInventory() {
         registerButton(3, 2,
                 new OpenInventoryButton(new ServerWorldsInventory(WorldManagement.get().getCache().getAllServerWorlds()), player),
-                new ItemBuilder(Material.CAULDRON)
+                new ItemBuilder(Material.CAULDRON_ITEM)
                         .setDisplayName(
                                 lang.getText("inventory.main.all.name"))
                         .setLore(
